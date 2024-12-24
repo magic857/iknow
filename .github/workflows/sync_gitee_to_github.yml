@@ -25,3 +25,11 @@ jobs:
         run: |
           git pull origin master  # 拉取 Gitee 上的更新（如果有的话）
           git push github dev  # 将更新推送到 GitHub 主分支
+
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@v3
+        with:
+          dir: './docs/.vitepress/dist'  # VitePress 默认的打包输出目录
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
