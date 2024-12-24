@@ -3,7 +3,8 @@ name: Sync Gitee to GitHub and Deploy to Netlify
 on:
   schedule:
     - cron: '* * * * *'  # 每 1 分钟同步一次，也可以根据需要修改
-    
+  workflow_dispatch:  # 手动触发工作流
+  
 jobs:
   sync:
     runs-on: ubuntu-latest
