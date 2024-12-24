@@ -45,10 +45,10 @@ jobs:
           npm run docs:build  # Run the build command
       
       - name: Deploy to Netlify
-        uses: netlify/actions/cli@v3
+        uses: netlify/actions/cli@master
         with:
-          publish-dir: .vitepress/dist  # 指定要部署的目录
+          args: deploy --dir=.vitepress/dist --functions=functions
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-            NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+       
