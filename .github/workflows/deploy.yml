@@ -29,4 +29,4 @@ jobs:
         run: |
           git add .
           git commit -m "Sync from Gitee to GitHub"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:main  # 或你要同步到的分支
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:dev  # 或你要同步到的分支
