@@ -32,7 +32,12 @@ jobs:
           git add .
           git commit -m "Sync from Gitee to GitHub"
           git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:dev  # 或你要同步到的分支
-      
+     
+      - name: Checkout dev branch
+        run: |
+          git checkout dev  # Switch to dev branch
+          git pull origin dev 
+          
       - name: Install dependencies
         run: |
           npm install
