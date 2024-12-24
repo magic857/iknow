@@ -45,7 +45,8 @@ jobs:
           npm run docs:build  # Run the build command
       
       - name: Deploy to Netlify
-        run: |
-          ls -a 
-          npm install -g netlify-cli  # Install Netlify CLI
-          netlify deploy --dir=.vitepress/dist --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}
+        uses: netlify/actions/build@dev
+        with:
+          netlify_auth_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}  # 从 GitHub Secrets 获取 Netlify 认证令牌
+          netlify_site_id: ${{ secrets.NETLIFY_SITE_ID }}  # 从 GitHub Secrets 获取 Netlify 站点 ID
+          publish: '.vitepress/dist'  # 指定发布的目录
