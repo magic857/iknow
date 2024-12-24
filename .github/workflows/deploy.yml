@@ -26,6 +26,7 @@ jobs:
       - name: Copy files from Gitee to GitHub
         run: |
           cp -r iknows/* .
+          ls -a 
           
       - name: Commit and push changes to GitHub
         run: |
