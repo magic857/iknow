@@ -43,4 +43,8 @@ jobs:
       - name: Build project
         run: |
           npm run docs:build  # Run the build command
-
+      
+      - name: Deploy to Netlify
+        run: |
+          npm install -g netlify-cli  # Install Netlify CLI
+          netlify deploy --dir=.vitepress/dist --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}
