@@ -1,0 +1,27 @@
+name: Sync Gitee to GitHub
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'  # 每 1 分钟同步一次，也可以根据需要修改
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "darkersu"
+          git config --global user.email "sxp_developer@163.com"
+
+      - name: Clone Gitee repository
+        run: |
+          git clone https://gitee.com/magic_developer/iknows.git
+          cd iknows
+          git remote add github https://github.com/magic857/iknow.git
+
+      - name: Push to GitHub
+        run: |
+          git pull origin master  # 拉取 Gitee 上的更新（如果有的话）
+          git push github dev  # 将更新推送到 GitHub 主分支
