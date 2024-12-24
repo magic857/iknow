@@ -46,7 +46,7 @@ jobs:
       
       - name: Deploy to Netlify
         uses: netlify/actions/build@master
-        with:
-          netlify_auth_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}  # 从 GitHub Secrets 获取 Netlify 认证令牌
-          netlify_site_id: ${{ secrets.NETLIFY_SITE_ID }}  # 从 GitHub Secrets 获取 Netlify 站点 ID
-          publish: '.vitepress/dist'  # 指定发布的目录
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+            NETLIFY_DIR: '.vitepress/dist'
