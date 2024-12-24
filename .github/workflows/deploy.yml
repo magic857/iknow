@@ -2,7 +2,7 @@ name: Sync Gitee to GitHub and Deploy to Netlify
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # 每 1 分钟同步一次，也可以根据需要修改
+    - cron: '* * * * *'  # 每 1 分钟同步一次，也可以根据需要修改
     
 jobs:
   sync:
