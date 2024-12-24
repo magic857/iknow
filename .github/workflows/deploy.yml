@@ -21,15 +21,14 @@ jobs:
         run: |
           git clone https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/magic_developer/iknows.git iknows
           cd iknows
-          ls -a
 
       - name: Copy files from Gitee to GitHub
         run: |
-          cp -r iknows/* .
+         rsync -av --exclude='.git' iknows/ .
           ls -a 
           
       - name: Commit and push changes to GitHub
         run: |
-          git add -f .vitepress
+          git add .
           git commit -m "Sync from Gitee to GitHub"
           git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:dev  # 或你要同步到的分支
