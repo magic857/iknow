@@ -9,8 +9,8 @@ jobs:
   sync-gitee:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout GitHub repository
-      #   uses: actions/checkout@v2
+      - name: Checkout GitHub repository
+        uses: actions/checkout@v2
 
       - name: Set up Git
         run: |
@@ -49,6 +49,16 @@ jobs:
           cd ..
           ls -a
       
+      - name: Push build to deploy branch
+        run: |
+          # Make sure to clean up the repository before pushing to deploy branch
+          git checkout --orphan deploy  # Create an orphan branch named deploy
+          git rm -rf .  # Remove all files from the branch
+          cp -r .vitepress/dist/* .  # Copy build output to the root of the deploy branch
+          git add .
+          git commit -m "Deploy build to deploy branch"
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:deploy
+
       # - name: Deploy to Netlify
       #   uses: netlify/actions/cli@master
       #   with:
