@@ -33,7 +33,7 @@ jobs:
         run: |
           git add .
           git commit -m "Sync from Gitee to GitHub"
-          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:dev  # 或你要同步到的分支
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:gitee-sync  # 或你要同步到的分支  
                
       - name: Install dependencies
         uses: actions/setup-node@v3
@@ -46,12 +46,14 @@ jobs:
         run: |
           npm run docs:build  # Run the build command
           ls -a
+          cd ..
+          ls -a
       
-      - name: Deploy to Netlify
-        uses: netlify/actions/cli@master
-        with:
-          args: deploy --dir=.vitepress/dist --prod
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      # - name: Deploy to Netlify
+      #   uses: netlify/actions/cli@master
+      #   with:
+      #     args: deploy --dir=.vitepress/dist --prod
+      #   env:
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
        
