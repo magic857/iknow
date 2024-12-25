@@ -21,6 +21,8 @@ jobs:
         run: |
           git clone https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/magic_developer/iknows.git iknows
           cd iknows
+          # 如果需要获取子模块
+          git submodule update --init --recursive
 
       - name: Copy files from Gitee to GitHub
         run: |
