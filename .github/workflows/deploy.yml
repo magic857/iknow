@@ -33,16 +33,16 @@ jobs:
           git commit -m "Sync from Gitee to GitHub"
           git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:dev  # 或你要同步到的分支
                
-      - name: Install dependencies
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      # - name: Install dependencies
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
           
-      - run: npm install
+      # - run: npm install
 
-      - name: Build project
-        run: |
-          npm run docs:build  # Run the build command
+      # - name: Build project
+      #   run: |
+      #     npm run docs:build  # Run the build command
       
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
