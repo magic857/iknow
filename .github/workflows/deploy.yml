@@ -19,12 +19,12 @@ jobs:
 
       - name: Clone Gitee repository
         run: |
-          git clone https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/magic_developer/iknows.git gitee-repo
-          cd gitee-repo
+          git clone https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/magic_developer/iknows.git iknows
+          cd iknows
 
       - name: Copy files from Gitee to GitHub
         run: |
-          rsync -av --exclude='.git' gitee-repo/ .
+          rsync -av --exclude='.git' iknows/ .
           ls -a 
           
       - name: Commit and push changes to GitHub
