@@ -46,8 +46,6 @@ jobs:
         run: |
           npm run docs:build  # Run the build command
           ls -a
-          cd ..
-          ls -a
       
       - name: Push build to deploy branch
         run: |
