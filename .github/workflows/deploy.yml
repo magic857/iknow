@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout GitHub repository
         uses: actions/checkout@v2
+        with:
+          submodules: false  # 禁用子模块克隆
 
       - name: Set up Git
         run: |
@@ -23,12 +25,13 @@ jobs:
           git clone https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/magic_developer/iknows.git iknows
           cd iknows
           # 如果需要获取子模块
-          git submodule update --init --recursive
+          # git submodule update --init --recursive
           
       # 复制到指定目录
       - name: Copy files from Gitee to GitHub
         run: |
-          rsync -av --exclude='.git' iknows/ .
+          # rsync -av --exclude='.git' iknows/ .
+          rsync -av iknows/ .
           ls -a 
           
       # 安装依赖
@@ -50,7 +53,7 @@ jobs:
         run: |
           cd .vitepress/dist
           git init
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:deploy
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git 
           git checkout -b deploy
           git add .
           git commit -m "Deploy site"
