@@ -50,7 +50,7 @@ jobs:
         run: |
           cd .vitepress/dist
           git init
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknows.git
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknow.git HEAD:deploy
           git checkout -b deploy
           git add .
           git commit -m "Deploy site"
