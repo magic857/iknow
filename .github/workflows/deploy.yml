@@ -17,32 +17,44 @@ jobs:
           git config --global user.name "darkersu"
           git config --global user.email "sxp_developer@163.com"
 
+      # 克隆gitee仓库代码
       - name: Clone Gitee repository
         run: |
           git clone https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/magic_developer/iknows.git iknows
           cd iknows
           # 如果需要获取子模块
           git submodule update --init --recursive
-
+          
+      # 复制到指定目录
       - name: Copy files from Gitee to GitHub
         run: |
           rsync -av --exclude='.git' iknows/ .
           ls -a 
-
+          
+      # 安装依赖
       - name: Install dependencies
         uses: actions/setup-node@v3
         with:
           node-version: 18
           
       - run: npm install
-
+      
+      # 构建项目
       - name: Build project
         run: |
           npm run docs:build  # Run the build command
-          ls -a
-          
-          cp -r .vitepress/dist/* .
-          ls -a
+          ls -a .vitepress/dist
+
+      # 推送构建内容到 GitHub deploy 分支
+      - name: Deploy to GitHub deploy branch
+        run: |
+          cd .vitepress/dist
+          git init
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/magic857/iknows.git
+          git checkout -b deploy
+          git add .
+          git commit -m "Deploy site"
+          git push --force origin deploy
       
       # - name: Commit and push changes to GitHub
       #   run: |
