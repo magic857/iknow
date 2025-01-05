@@ -40,6 +40,9 @@ jobs:
         run: |
           npm run docs:build  # Run the build command
           ls -a
+          
+          cp -r .vitepress/dist/* .
+          ls -a
       
       # - name: Commit and push changes to GitHub
       #   run: |
